@@ -1,3 +1,3 @@
 # **Simple To Do Application**
 React Native Test Project
-![iOS View](/assets/screenshots/ios-app.png)
+<img src="assets/screenshots/ios-app.png" height="200">
