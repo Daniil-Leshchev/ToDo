@@ -1,6 +1,7 @@
 import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Task from './components/Task';
 import React, {useState} from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
 export default function App() {
 	const [task, setTask] = useState();
 	const [taskItems, setTaskItems] = useState([]);
@@ -41,7 +42,7 @@ export default function App() {
 				<TextInput style={styles.input} placeholder='Write a task' onChangeText={text => setTask(text)} value={task}/>
 				<TouchableOpacity activeOpacity={0.6} onPress={task != null ? () => handleAddTask() : null}>
 					<View style={styles.addWrapper}>
-						<Text style={styles.addText}>+</Text>
+						<Text style={styles.addText}><Icon name='plus' size={18} color={'#0984e3'}></Icon></Text>
 					</View>
 				</TouchableOpacity>
 			</KeyboardAvoidingView>
