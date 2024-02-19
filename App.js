@@ -1,4 +1,4 @@
-import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Task from './components/Task';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -19,7 +19,7 @@ export default function App() {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.tasksWrapper}>
+			<ScrollView style={styles.tasksWrapper}>
 				<Text style={styles.sectionTitle}>{weekday}'s tasks</Text>
 				<View>
 					{
@@ -32,7 +32,7 @@ export default function App() {
 						})
 					}
 				</View>
-			</View>
+			</ScrollView>
 
 			{/* view который подстраивается под клавиатуру, чтобы не мешать контенту */}
 			<KeyboardAvoidingView
@@ -74,14 +74,15 @@ const styles = StyleSheet.create({
 		width: '100%',
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		alignItems: 'center'
+		alignItems: 'center',
+		paddingHorizontal: 20
 	},
 	input: {
 		paddingVertical: 15,
 		paddingHorizontal: 15,
 		backgroundColor: '#fff',
 		borderRadius: 60, 
-		width: 270,
+		width: 300,
 		borderColor: '#C0C0C0',
 		borderWidth: 1
 	},
