@@ -1,15 +1,35 @@
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Task from './components/Task';
+import React, {useState} from 'react';
 export default function App() {
+	const [task, setTask] = useState();
+	const [taskItems, setTaskItems] = useState([]);
+	const handleAddTask = () => {
+		Keyboard.dismiss();
+		setTaskItems([...taskItems, task]);
+		setTask(null);
+	}
+
+	const completeTask = (index) => {
+		let itemsCopy = [...taskItems];
+		itemsCopy.splice(index, 1);
+		setTaskItems(itemsCopy);
+	}
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.tasksWrapper}>
 				<Text style={styles.sectionTitle}>{weekday}'s tasks</Text>
 				<View>
-					<Task text={'Task 1'}/>
-					<Task text={'Task 2'}/>
-					<Task text={'One More Task'}/>
-					<Task text={'Long text to check if it for overflowing. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}/>
+					{
+						taskItems.map((item, index) => {
+							return (
+								<TouchableOpacity key={index} activeOpacity={0.6} onPress={() => completeTask(index)}>
+									<Task text={item}/>
+								</TouchableOpacity>
+							)
+						})
+					}
 				</View>
 			</View>
 
@@ -18,8 +38,8 @@ export default function App() {
 				style={styles.writeTaskWrapper}
 				behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
 				{/* разная работа с элементами ос, поэтому нужно ставить разные свойства */}
-				<TextInput style={styles.input} placeholder='Write a task'></TextInput>
-				<TouchableOpacity activeOpacity={0.6}>
+				<TextInput style={styles.input} placeholder='Write a task' onChangeText={text => setTask(text)} value={task}/>
+				<TouchableOpacity activeOpacity={0.6} onPress={() => handleAddTask()}>
 					<View style={styles.addWrapper}>
 						<Text style={styles.addText}>+</Text>
 					</View>
