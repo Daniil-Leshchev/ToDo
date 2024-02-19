@@ -5,13 +5,13 @@ export default function App() {
 	const [task, setTask] = useState();
 	const [taskItems, setTaskItems] = useState([]);
 	const handleAddTask = () => {
-		Keyboard.dismiss();
+		Keyboard.dismiss();//скрываем
 		setTaskItems([...taskItems, task]);
 		setTask(null);
 	}
 
 	const completeTask = (index) => {
-		let itemsCopy = [...taskItems];
+		let itemsCopy = [...taskItems];//spread syntax
 		itemsCopy.splice(index, 1);
 		setTaskItems(itemsCopy);
 	}
@@ -39,7 +39,7 @@ export default function App() {
 				behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
 				{/* разная работа с элементами ос, поэтому нужно ставить разные свойства */}
 				<TextInput style={styles.input} placeholder='Write a task' onChangeText={text => setTask(text)} value={task}/>
-				<TouchableOpacity activeOpacity={0.6} onPress={() => handleAddTask()}>
+				<TouchableOpacity activeOpacity={0.6} onPress={task != null ? () => handleAddTask() : null}>
 					<View style={styles.addWrapper}>
 						<Text style={styles.addText}>+</Text>
 					</View>
