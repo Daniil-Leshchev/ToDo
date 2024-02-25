@@ -16,7 +16,9 @@
     "react": "18.2.0",
     "react-native": "0.73.4",
     "react-native-vector-icons": "^10.0.3",
-    "typings": "^2.1.1"
+    "typings": "^2.1.1",
+    "expo-image": "~1.10.6",
+    "expo-font": "~11.10.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

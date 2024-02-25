@@ -1,6 +1,7 @@
 import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Task from './components/Task';
 import React, {useState} from 'react';
+import {Image} from 'expo-image';
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default function App() {
 	const [task, setTask] = useState();
@@ -19,20 +20,29 @@ export default function App() {
 
 	return (
 		<View style={styles.container}>
-			<ScrollView style={styles.tasksWrapper}>
-				<Text style={styles.sectionTitle}>{weekday}'s tasks</Text>
-				<View>
-					{
-						taskItems.map((item, index) => {
-							return (
-								<TouchableOpacity key={index} activeOpacity={0.6} onPress={() => completeTask(index)}>
-									<Task text={item}/>
-								</TouchableOpacity>
-							)
-						})
-					}
+			{
+				taskItems.length != 0 ?
+					<ScrollView style={styles.tasksWrapper}>
+					<Text style={styles.sectionTitle}>{weekday}'s tasks</Text>
+					<View>
+						{
+							taskItems.map((item, index) => {
+								return (
+									<TouchableOpacity key={index} activeOpacity={0.6} onPress={() => completeTask(index)}>
+										<Task text={item}/>
+									</TouchableOpacity>
+								)
+							})
+						}
+					</View>
+					</ScrollView>
+				:
+				<View style={styles.noTasksWrapper}>
+					<Text style={styles.noTasksText}>You have no tasks for today!</Text>
+					<Image style={{width: 250, height: 250}} source={require('./assets/in-app-imgs/completed-task.svg')} />
 				</View>
-			</ScrollView>
+			}
+			
 
 			{/* view который подстраивается под клавиатуру, чтобы не мешать контенту */}
 			<KeyboardAvoidingView
@@ -57,7 +67,7 @@ const weekday = weekdayList[today.getDay()];
 let bcgColor = "#E8EAED"
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		flex: 1,//растяжение на весь экран
 		backgroundColor: bcgColor,
   	},
 	tasksWrapper: {
@@ -97,5 +107,16 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		borderColor: '#C0C0C0',
 		borderWidth: 1
+	},
+
+	noTasksWrapper: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+
+	noTasksText: {
+		fontSize: 24,
+		fontFamily: 'Montserrat'
 	}
 });
