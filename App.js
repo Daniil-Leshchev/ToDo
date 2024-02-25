@@ -1,18 +1,38 @@
-import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Animated, Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Task from './components/Task';
-import React, {useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import { Image } from 'expo-image';
 import { useFonts, Inter_900Black, Inter_600SemiBold } from '@expo-google-fonts/inter';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+const FadeInView = props => {
+	const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+  
+	useEffect(() => {
+	  Animated.timing(fadeAnim, {
+		toValue: 1,
+		duration: 250,
+		useNativeDriver: true,
+	  }).start();
+	}, [fadeAnim]);
+  
+	return (
+	  <Animated.View // Special animatable View
+		style={{
+		  ...props.style,
+		  opacity: fadeAnim, // Bind opacity to animated value
+		}}>
+		{props.children}
+	  </Animated.View>
+	);
+};
+
 export default function App() {
 	let [fontsLoaded, fontError] = useFonts({
 		Inter_900Black,
 		Inter_600SemiBold
 	});
-	
-	if (!fontsLoaded && !fontError) {
-		return null;
-	}
+
 	const [task, setTask] = useState();
 	const [taskItems, setTaskItems] = useState([]);
 	const handleAddTask = () => {
@@ -46,10 +66,10 @@ export default function App() {
 					</View>
 					</ScrollView>
 				:
-				<View style={styles.noTasksWrapper}>
+				<FadeInView style={styles.noTasksWrapper}>
 					<Text style={styles.noTasksText}>You have no tasks for today!</Text>
 					<Image style={{width: 250, height: 250}} source={require('./assets/in-app-imgs/completed-task.svg')} />
-				</View>
+				</FadeInView>
 			}
 			
 
