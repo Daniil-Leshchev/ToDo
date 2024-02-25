@@ -2,9 +2,16 @@ import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text,
 import Task from './components/Task';
 import React, {useState} from 'react';
 import { Image } from 'expo-image';
-import { useFonts, Inter_900Black, Inter_600SemiBold } from '@expo-google-fonts/inter';
+import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default function App() {
+	let [fontsLoaded, fontError] = useFonts({
+		Inter_900Black
+	});
+	
+	if (!fontsLoaded && !fontError) {
+		return null;
+	}
 	const [task, setTask] = useState();
 	const [taskItems, setTaskItems] = useState([]);
 	const handleAddTask = () => {
