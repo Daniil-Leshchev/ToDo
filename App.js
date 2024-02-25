@@ -7,7 +7,7 @@ export default function App() {
 	const [taskItems, setTaskItems] = useState([]);
 	const handleAddTask = () => {
 		Keyboard.dismiss();//скрываем
-		setTaskItems([...taskItems, task]);
+		setTaskItems([...taskItems, task]);//передаем в settaskitems оставшиеся taskitems и task
 		setTask(null);
 	}
 
@@ -39,7 +39,8 @@ export default function App() {
 				style={styles.writeTaskWrapper}
 				behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
 				{/* разная работа с элементами ос, поэтому нужно ставить разные свойства */}
-				<TextInput style={styles.input} placeholder='Write a task' onChangeText={text => setTask(text)} value={task}/>
+				<TextInput style={styles.input} placeholder='Create a task' onChangeText={text => setTask(text)} value={task}
+				onSubmitEditing={task != null ? () => handleAddTask() : null}/>
 				<TouchableOpacity activeOpacity={0.6} onPress={task != null ? () => handleAddTask() : null}>
 					<View style={styles.addWrapper}>
 						<Text style={styles.addText}><Icon name='plus' size={18} color={'#0984e3'}></Icon></Text>
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 15,
 		backgroundColor: '#fff',
 		borderRadius: 60, 
-		width: 300,
+		width: '80%',
 		borderColor: '#C0C0C0',
 		borderWidth: 1
 	},
