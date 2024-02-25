@@ -1,7 +1,8 @@
 import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Task from './components/Task';
 import React, {useState} from 'react';
-import {Image} from 'expo-image';
+import { Image } from 'expo-image';
+import { useFonts, Inter_900Black, Inter_600SemiBold } from '@expo-google-fonts/inter';
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default function App() {
 	const [task, setTask] = useState();
@@ -117,6 +118,6 @@ const styles = StyleSheet.create({
 
 	noTasksText: {
 		fontSize: 24,
-		fontFamily: 'Montserrat'
+		fontFamily: 'Inter_900Black'
 	}
 });
