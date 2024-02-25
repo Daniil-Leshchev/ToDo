@@ -2,11 +2,12 @@ import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text,
 import Task from './components/Task';
 import React, {useState} from 'react';
 import { Image } from 'expo-image';
-import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
+import { useFonts, Inter_900Black, Inter_600SemiBold } from '@expo-google-fonts/inter';
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default function App() {
 	let [fontsLoaded, fontError] = useFonts({
-		Inter_900Black
+		Inter_900Black,
+		Inter_600SemiBold
 	});
 	
 	if (!fontsLoaded && !fontError) {
@@ -125,6 +126,6 @@ const styles = StyleSheet.create({
 
 	noTasksText: {
 		fontSize: 24,
-		fontFamily: 'Inter_900Black'
+		fontFamily: 'Inter_600SemiBold'
 	}
 });
