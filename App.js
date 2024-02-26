@@ -52,18 +52,18 @@ export default function App() {
 			{
 				taskItems.length != 0 ?
 					<ScrollView style={styles.tasksWrapper}>
-					<Text style={styles.sectionTitle}>{weekday}'s tasks</Text>
-					<View>
-						{
-							taskItems.map((item, index) => {
-								return (
-									<TouchableOpacity key={index} activeOpacity={0.6} onPress={() => completeTask(index)}>
-										<Task text={item}/>
-									</TouchableOpacity>
-								)
-							})
-						}
-					</View>
+						<Text style={styles.sectionTitle}>{weekday}'s tasks</Text>
+						<FadeInView>
+							{
+								taskItems.map((item, index) => {
+									return (
+										<TouchableOpacity key={index} activeOpacity={0.6} onPress={() => completeTask(index)}>
+											<Task text={item}/>
+										</TouchableOpacity>
+									)
+								})
+							}
+						</FadeInView>
 					</ScrollView>
 				:
 				<FadeInView style={styles.noTasksWrapper}>
