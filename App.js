@@ -67,7 +67,7 @@ export default function App() {
 					</ScrollView>
 				:
 				<FadeInView style={styles.noTasksWrapper}>
-					<Text style={styles.noTasksText}>You have 0 tasks for today!</Text>
+					<Text style={styles.noTasksText}>You have no tasks for today!</Text>
 					<Image style={{width: 250, height: 250}} source={require('./assets/in-app-imgs/completed-task.svg')} />
 				</FadeInView>
 			}
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		borderRadius: 60, 
 		width: '80%',
-		borderColor: '#000',
+		borderColor: '#C0C0C0',
 		borderWidth: 1
 	},
 
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
 		borderRadius: 60,
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderColor: '#000',
+		borderColor: '#C0C0C0',
 		borderWidth: 1
 	},
 
